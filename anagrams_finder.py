@@ -14,6 +14,26 @@ def get_words_dict(file_):
 
     return result_dict
 
+def del_blanks(input_string):
+    """
+    Delete blanks from input_string, returning the result.
+
+    If the input was a list, return a list.
+    If the input was anything else, return a str.
+    """
+    output_list = []
+    for character in input_string:
+        if character == ' ':
+            pass
+        else:
+            output_list.append(character)
+
+    if isinstance(input_string, list):
+        return output_list
+
+    output_string = ''.join(output_list)
+    return output_string
+
 def find_anagrams_recursive(
         result_anagrams,
         sentence,
