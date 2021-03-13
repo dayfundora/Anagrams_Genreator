@@ -14,6 +14,37 @@ def get_words_dict(file_):
 
     return result_dict
 
+def find_anagrams_recursive(
+        result_anagrams,
+        sentence,
+        sentence_frequencies,
+        current_words_dict,
+        candidate_sentence,
+):
+    max_word_len = len(del_blanks(sentence)) - len(del_blanks(candidate_sentence))
+
+    if max_word_len == 0:
+        print(''.join(candidate_sentence))
+        result_anagrams.append(''.join(candidate_sentence))
+        return
+
+    for current_word_len in range(1, max_word_len + 1):
+        if current_word_len in current_words_dict:
+            for current_word in current_words_dict[current_word_len]:
+                current_candidate_sentence = candidate_sentence[:]
+                if current_candidate_sentence:
+                    current_candidate_sentence.append(' ')
+
+                current_candidate_sentence.extend(current_word)
+
+                find_anagrams_recursive(
+                    result_anagrams,
+                    sentence,
+                    sentence_frequencies,
+                    current_words_dict,
+                    current_candidate_sentence,
+                    )
+
 def find_anagrams(sentence):
     result_anagrams = []
 
@@ -23,5 +54,15 @@ def find_anagrams(sentence):
     
     with open('english.txt', 'r') as dictionary_file:
         original_dict = get_words_dict(dictionary_file)
+
+    candidate_sentence = []
+
+    find_anagrams_recursive(
+        result_anagrams,
+        sentence_list,
+        sentence_frequencies,
+        original_dict,
+        candidate_sentence,
+        )
 
     return result_anagrams
