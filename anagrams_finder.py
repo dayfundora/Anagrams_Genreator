@@ -9,8 +9,9 @@ def get_words_dict(file_):
 
     for candidate_line in file_:
         candidate_word = candidate_line.lower().rstrip()
-        length = len(candidate_word)
-        result_dict[length].add(candidate_word)
+        if candidate_word.isalpha() and contains_vowel(candidate_word):
+            length = len(candidate_word)
+            result_dict[length].add(candidate_word)
 
     return result_dict
 
