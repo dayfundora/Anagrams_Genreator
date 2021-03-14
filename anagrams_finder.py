@@ -40,6 +40,14 @@ def is_word_of_alphabet(alphabet, word):
 
     return bool(words_alphabet.is_subset(alphabet))
 
+def prune_words_dict_for_alphabet(words_dict, alphabet):
+    result_dict = collections.defaultdict(set)
+    for length, words_of_length in words_dict.items():
+        for word in words_of_length:
+            if is_word_of_alphabet(alphabet, word):
+                result_dict[length].add(word)
+    return result_dict
+
 
 def find_anagrams_recursive(
         result_anagrams,
