@@ -35,6 +35,12 @@ def del_blanks(input_string):
     output_string = ''.join(output_list)
     return output_string
 
+def is_word_of_alphabet(alphabet, word):
+    words_alphabet = cO.CharOcurrence(word)
+
+    return bool(words_alphabet.is_subset(alphabet))
+
+
 def find_anagrams_recursive(
         result_anagrams,
         sentence,
