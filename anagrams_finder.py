@@ -48,7 +48,6 @@ def prune_words_dict_for_alphabet(words_dict, alphabet):
                 result_dict[length].add(word)
     return result_dict
 
-
 def find_anagrams_recursive(
         result_anagrams,
         sentence,
@@ -90,13 +89,15 @@ def find_anagrams(sentence):
     with open('english.txt', 'r') as dictionary_file:
         original_dict = get_words_dict(dictionary_file)
 
+    prune_dict = prune_words_dict_for_alphabet(original_dict, sentence_frequencies)
+
     candidate_sentence = []
 
     find_anagrams_recursive(
         result_anagrams,
         sentence_list,
         sentence_frequencies,
-        original_dict,
+        prune_dict,
         candidate_sentence,
         )
 
