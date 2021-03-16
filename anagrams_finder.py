@@ -4,6 +4,13 @@ import sys
 import collections
 import char_ocurrence as cO
 
+def contains_vowel(string):
+    vowels = set('aeiouy')
+
+    string_set = set(string)
+
+    return bool(vowels & string_set)
+
 def get_words_dict(file_):
     result_dict = collections.defaultdict(set)
 
