@@ -59,9 +59,13 @@ def find_anagrams_recursive(
         result_anagrams,
         sentence,
         sentence_frequencies,
-        current_words_dict,
+        prune_dict,
         candidate_sentence,
 ):
+    usable_letter_counts = cO.CharOcurrence(sentence) - cO.CharOcurrence(candidate_sentence)
+
+    current_words_dict = prune_words_dict_for_alphabet(prune_dict, usable_letter_counts)
+
     max_word_len = len(del_blanks(sentence)) - len(del_blanks(candidate_sentence))
 
     if max_word_len == 0:
