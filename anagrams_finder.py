@@ -18,8 +18,20 @@ def get_words_dict(file_):
         candidate_word = candidate_line.lower().rstrip()
         if candidate_word.isalpha() and contains_vowel(candidate_word):
             length = len(candidate_word)
-            result_dict[length].add(candidate_word)
 
+    return result_dict
+
+def is_word_of_alphabet(alphabet, word):
+    words_alphabet = cO.CharOcurrence(word)
+    return bool(words_alphabet.is_subset(alphabet))
+
+
+def prune_words_dict_for_alphabet(words_dict, alphabet):
+    result_dict = collections.defaultdict(set)
+    for length, words_of_length in words_dict.items():
+        for word in words_of_length:
+            if is_word_of_alphabet(alphabet, word):
+                result_dict[length].add(word)
     return result_dict
 
 def del_blanks(input_string):
@@ -42,18 +54,6 @@ def del_blanks(input_string):
     output_string = ''.join(output_list)
     return output_string
 
-def is_word_of_alphabet(alphabet, word):
-    words_alphabet = cO.CharOcurrence(word)
-
-    return bool(words_alphabet.is_subset(alphabet))
-
-def prune_words_dict_for_alphabet(words_dict, alphabet):
-    result_dict = collections.defaultdict(set)
-    for length, words_of_length in words_dict.items():
-        for word in words_of_length:
-            if is_word_of_alphabet(alphabet, word):
-                result_dict[length].add(word)
-    return result_dict
 
 def find_anagrams_recursive(
         result_anagrams,
