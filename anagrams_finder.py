@@ -5,28 +5,32 @@ import collections
 import char_ocurrence as cO
 
 def contains_vowel(string):
-    vowels = set('aeiouy')
-
+    """Return True iff string contains a vowel"""
+    vowels = set('aeiou')
     string_set = set(string)
 
     return bool(vowels & string_set)
 
 def get_words_dict(file_):
+    """Read a file with words.  Prune out anything with punctuation."""
     result_dict = collections.defaultdict(set)
 
     for candidate_line in file_:
         candidate_word = candidate_line.lower().rstrip()
         if candidate_word.isalpha() and contains_vowel(candidate_word):
             length = len(candidate_word)
+            result_dict[length].add(candidate_word)
 
     return result_dict
 
 def is_word_of_alphabet(alphabet, word):
+    """Check if a word conforms to our alphabet."""
     words_alphabet = cO.CharOcurrence(word)
     return bool(words_alphabet.is_subset(alphabet))
 
 
 def prune_words_dict_for_alphabet(words_dict, alphabet):
+    """Eliminate words that aren't over the appropriate alphabet from our words_dict."""
     result_dict = collections.defaultdict(set)
     for length, words_of_length in words_dict.items():
         for word in words_of_length:
@@ -35,12 +39,7 @@ def prune_words_dict_for_alphabet(words_dict, alphabet):
     return result_dict
 
 def del_blanks(input_string):
-    """
-    Delete blanks from input_string, returning the result.
-
-    If the input was a list, return a list.
-    If the input was anything else, return a str.
-    """
+    """Delete blanks from input_string, returning the result."""
     output_list = []
     for character in input_string:
         if character == ' ':
@@ -62,6 +61,7 @@ def find_anagrams_recursive(
         prune_dict,
         candidate_sentence,
 ):
+    """Find anagrams for sentence."""
     usable_letter_counts = cO.CharOcurrence(sentence) - cO.CharOcurrence(candidate_sentence)
 
     current_words_dict = prune_words_dict_for_alphabet(prune_dict, usable_letter_counts)
@@ -90,7 +90,10 @@ def find_anagrams_recursive(
                     current_candidate_sentence,
                     )
 
+
 def find_anagrams(sentence):
+    """Find anagrams for a sentence."""
+    
     result_anagrams = []
 
     sentence_list = list(sentence)
