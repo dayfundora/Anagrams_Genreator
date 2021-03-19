@@ -91,7 +91,7 @@ def find_anagrams_recursive(
                     )
 
 
-def find_anagrams(sentence):
+def find_anagrams(sentence, dict_file='english.txt'):
     """Find anagrams for a sentence."""
     
     result_anagrams = []
@@ -100,7 +100,7 @@ def find_anagrams(sentence):
 
     sentence_frequencies = cO.CharOcurrence(sentence_list)
     
-    with open('english.txt', 'r') as dictionary_file:
+    with open(dict_file, 'r') as dictionary_file:
         original_dict = get_words_dict(dictionary_file)
 
     prune_dict = prune_words_dict_for_alphabet(original_dict, sentence_frequencies)
