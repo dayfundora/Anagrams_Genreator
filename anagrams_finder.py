@@ -53,6 +53,12 @@ def del_blanks(input_string):
     output_string = ''.join(output_list)
     return output_string
 
+def remove_from_sentence(sentence, words):
+    characters = ''.join(word.strip() for word in words).lower()
+    subsentence = sentence
+    for char in characters: 
+        subsentence = subsentence.replace(char, '', 1)
+    return subsentence
 
 def find_anagrams_recursive(
         result_anagrams,
