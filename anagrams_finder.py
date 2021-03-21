@@ -97,11 +97,15 @@ def find_anagrams_recursive(
                     )
 
 
-def find_anagrams(sentence, dict_file='english.txt'):
+def find_anagrams(sentence, dict_file='english.txt', include=[]):
     """Find anagrams for a sentence."""
     
     result_anagrams = []
 
+    sentence = remove_from_sentence(sentence, include)
+    
+    include_words = ' '.join(word.strip() for word in words)
+    
     sentence_list = list(sentence)
 
     sentence_frequencies = cO.CharOcurrence(sentence_list)
