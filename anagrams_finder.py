@@ -66,6 +66,7 @@ def find_anagrams_recursive(
         sentence_frequencies,
         prune_dict,
         candidate_sentence,
+        include_words,
 ):
     """Find anagrams for sentence."""
     usable_letter_counts = cO.CharOcurrence(sentence) - cO.CharOcurrence(candidate_sentence)
@@ -75,8 +76,13 @@ def find_anagrams_recursive(
     max_word_len = len(del_blanks(sentence)) - len(del_blanks(candidate_sentence))
 
     if max_word_len == 0:
-        print(''.join(candidate_sentence))
-        result_anagrams.append(''.join(candidate_sentence))
+        if(include_words!=""):
+            print(include_words+' '+''.join(candidate_sentence))
+            result_anagrams.append(include_words+' '+''.join(candidate_sentence))
+        else:
+            print(''.join(candidate_sentence))
+            result_anagrams.append(''.join(candidate_sentence))
+        
         return
 
     for current_word_len in range(1, max_word_len + 1):
@@ -94,6 +100,7 @@ def find_anagrams_recursive(
                     sentence_frequencies,
                     current_words_dict,
                     current_candidate_sentence,
+                    include_words,
                     )
 
 
@@ -104,7 +111,7 @@ def find_anagrams(sentence, dict_file='english.txt', include=[]):
 
     sentence = remove_from_sentence(sentence, include)
     
-    include_words = ' '.join(word.strip() for word in words)
+    include_words = ' '.join(word.strip() for word in include)
     
     sentence_list = list(sentence)
 
@@ -123,6 +130,7 @@ def find_anagrams(sentence, dict_file='english.txt', include=[]):
         sentence_frequencies,
         prune_dict,
         candidate_sentence,
+        include_words
         )
 
     return result_anagrams
