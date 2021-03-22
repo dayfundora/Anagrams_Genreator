@@ -60,6 +60,16 @@ def remove_from_sentence(sentence, words):
         subsentence = subsentence.replace(char, '', 1)
     return subsentence
 
+def remove_from_dict(words_dict, words):
+    """Eliminate words from words_dict."""
+    result_dict = collections.defaultdict(set)
+    for word in words:
+        length = len(word)
+        if word in result_dict[length]:
+            result_dict[length].remove(word)
+    return result_dict
+
+
 def find_anagrams_recursive(
         result_anagrams,
         sentence,
