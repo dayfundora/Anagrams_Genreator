@@ -62,7 +62,7 @@ def remove_from_sentence(sentence, words):
 
 def remove_from_dict(words_dict, words):
     """Eliminate words from words_dict."""
-    result_dict = collections.defaultdict(set)
+    result_dict = words_dicts
     for word in words:
         length = len(word)
         if word in result_dict[length]:
