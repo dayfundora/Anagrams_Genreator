@@ -62,13 +62,11 @@ def remove_from_sentence(sentence, words):
 
 def remove_from_dict(words_dict, words):
     """Eliminate words from words_dict."""
-    result_dict = words_dicts
     for word in words:
         length = len(word)
-        if word in result_dict[length]:
-            result_dict[length].remove(word)
-    return result_dict
-
+        if word in words_dict[length]:
+            words_dict[length].remove(word)
+    return words_dict
 
 def find_anagrams_recursive(
         result_anagrams,
@@ -113,8 +111,7 @@ def find_anagrams_recursive(
                     include_words,
                     )
 
-
-def find_anagrams(sentence, dict_file='english.txt', include=[]):
+def find_anagrams(sentence, dict_file='english.txt', include=[], exclude=[]):
     """Find anagrams for a sentence."""
     
     result_anagrams = []
@@ -129,6 +126,8 @@ def find_anagrams(sentence, dict_file='english.txt', include=[]):
     
     with open(dict_file, 'r') as dictionary_file:
         original_dict = get_words_dict(dictionary_file)
+
+    remove_from_dict(original_dict, exclude)
 
     prune_dict = prune_words_dict_for_alphabet(original_dict, sentence_frequencies)
 
