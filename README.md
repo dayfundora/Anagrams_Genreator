@@ -1,6 +1,6 @@
 
 ## Anagrams Generator
-[![Header](https://raw.githubusercontent.com/dayfundora/Anagrams_Generator/main/doc/readme_header.jpg"Header")](https://github.com/dayfundora)
+[![Header](https://github.com/dayfundora/Anagrams_Genreator/blob/f0b91dd06bc1ace084d5b9a4720bdc62ba914b10/doc/readme_header.jpg)](https://github.com/dayfundora)
 This is a program for computing multiword anagrams.  It makes no effort to come up with sentences that make sense; it only finds anagrammatic sentences, irrespective of meaning.
 
 #### The simplest way to use it:
